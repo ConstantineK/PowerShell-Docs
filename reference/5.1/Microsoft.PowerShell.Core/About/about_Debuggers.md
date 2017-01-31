@@ -55,18 +55,18 @@ stack.
 Debugger Cmdlets
 The Windows PowerShell debugger includes the following set of cmdlets:
 
-Set-PsBreakpoint:     Sets breakpoints on lines, variables, and
+`Set-PsBreakpoint`:     Sets breakpoints on lines, variables, and
 commands.
 
-Get-PsBreakpoint:     Gets breakpoints in the current session.
+`Get-PsBreakpoint`:     Gets breakpoints in the current session.
 
-Disable-PsBreakpoint: Turns off breakpoints in the current session.
+`Disable-PsBreakpoint`: Turns off breakpoints in the current session.
 
-Enable-PsBreakpoint:  Re-enables breakpoints in the current session.
+`Enable-PsBreakpoint`:  Re-enables breakpoints in the current session.
 
-Remove-PsBreakpoint:  Deletes breakpoints from the current session.
+`Remove-PsBreakpoint`:  Deletes breakpoints from the current session.
 
-Get-PsCallStack:      Displays the current call stack.
+`Get-PsCallStack`:      Displays the current call stack.
 
 Starting and Stopping the Debugger
 To start the debugger, set one or more breakpoints. Then, run the script,
@@ -76,7 +76,7 @@ When you reach a breakpoint, execution stops, and control is turned over
 to the debugger.
 
 To stop the debugger, run the script, command, or function until it is
-complete. Or, type "stop" or "t".
+complete. Or, type `stop` or `t`.
 
 Debugger Commands
 When you use the debugger in the Windows PowerShell console, use the
@@ -86,63 +86,63 @@ use commands on the Debug menu.
 Note: For information about how to use the debugger in other host
 applications, see the host application documentation.
 
-s, StepInto        Executes the next statement and then stops.
+`s`, `StepInto`        Executes the next statement and then stops.
 
-v, StepOver        Executes the next statement, but skips functions
+`v`, `StepOver`        Executes the next statement, but skips functions
 and invocations. The skipped statements are
 executed, but not stepped through.
 
-Ctrl+Break
+`Ctrl+Break`
 (Break All in ISE)  Breaks into a running script within either the
 Windows PowerShell console, or Windows PowerShell ISE.
 Note that Ctrl+Break in Windows PowerShell 2.0, 3.0,
 and 4.0 closes the program. Break All works on both
 local and remote interactively-running scripts.
 
-o, StepOut         Steps out of the current function; up one level
+`o`, `StepOut`         Steps out of the current function; up one level
 if nested. If in the main body, it continues to
 the end or the next breakpoint. The skipped
 statements are executed, but not stepped through.
 
-c, Continue         Continues to run until the script is complete or
+`c`, `Continue`         Continues to run until the script is complete or
 until the next breakpoint is reached. The skipped
 statements are executed, but not stepped through.
 
-l, List             Displays the part of the script that is executing.
+`l`, `List`             Displays the part of the script that is executing.
 By default, it displays the current line, five
 previous lines, and 10 subsequent lines. To continue
 listing the script, press ENTER.
 
-l <m>, List         Displays 16 lines of the script beginning with the
+`l <m>`, `List`         Displays 16 lines of the script beginning with the
 line number specified by <m>.
 
-l <m> <n>, List     Displays <n> lines of the script, beginning with the
+`l <m> <n>`, `List`     Displays <n> lines of the script, beginning with the
 line number specified by <m>.
 
-q, Stop, Exit       Stops executing the script, and exits the debugger. If you
+`q`, `Stop`, `Exit`       Stops executing the script, and exits the debugger. If you
 are debugging a job by running the Debug-Job cmdlet, the Exit
 command detaches the debugger, and allows the job to continue
 running.
 
-k, Get-PsCallStack  Displays the current call stack.
+`k`, `Get-PsCallStack`  Displays the current call stack.
 
-<Enter>             Repeats the last command if it was Step (s),
+`<Enter>`             Repeats the last command if it was Step (s),
 StepOver (v), or List (l). Otherwise, represents a
 submit action.
 
-?, h                Displays the debugger command Help.
+`?`, `h`               Displays the debugger command Help.
 
-To exit the debugger, you can use Stop (q).
-Starting in Windows PowerShell 5.0, you can run the Exit command to exit a
-nested debugging session that you started by running either Debug-Job or
-Debug-Runspace.
+To exit the debugger, you can use `Stop` (`q`).
+Starting in Windows PowerShell 5.0, you can run the `Exit` command to exit a
+nested debugging session that you started by running either `Debug-Job` or
+`Debug-Runspace`.
 
 By using these debugger commands, you can run a script, stop on a point
 of concern, examine the values of variables and the state of the system,
 and continue running the script until you have identified a problem.
 
 NOTE:  If you step into a statement with a redirection operator,
-such as ">", the Windows PowerShell debugger steps over all
+such as `>`, the Windows PowerShell debugger steps over all
 remaining statements in the script.
 
 Displaying the Values of script Variables
@@ -153,12 +153,11 @@ value of variables, use cmdlets, and run scripts at the command line.
 You can display the current value of all variables in the script that is
 being debugged, except for the following automatic variables:
 
-# $_
-
-$Args
-$Input
-$MyInvocation
-$PSBoundParameters
+* $_
+* $Args
+* $Input
+* $MyInvocation
+* $PSBoundParameters
 
 If you try to display the value of any of these variables, you get the
 value of that variable for in an internal pipeline the debugger uses, not
@@ -170,13 +169,13 @@ Then you can display the value of the new variable.
 
 For example,
 
-$scriptArgs = $Args
-$scriptArgs
+```$scriptArgs = $Args
+$scriptArgs```
 
 In the example in this topic, the value of the $MyInvocation variable is
 reassigned as follows:
 
-$scriptname = $MyInvocation.MyCommand.Path
+`$scriptname = $MyInvocation.MyCommand.Path`
 
 The Debugger Environment
 When you reach a breakpoint, you enter the debugger environment. The
@@ -193,27 +192,28 @@ command prompt.
 For example, the following is the default debugging prompt in the
 Windows PowerShell console:
 
-[DBG]: PS (get-location)>>>
+`[DBG]: PS (get-location)>>>`
 
-You can find the nesting level by using the $NestedPromptLevel
+You can find the nesting level by using the `$NestedPromptLevel`
 automatic variable.
 
-Additionally, an automatic variable, $PSDebugContext, is defined in
-the local scope. You can use the presence of the $PsDebugContext
+Additionally, an automatic variable, `$PSDebugContext`, is defined in
+the local scope. You can use the presence of the `$PsDebugContext`
 variable to determine whether you are in the debugger.
 
 For example:
 
-if ($psdebugcontext) {"Debugging"} else {"Not Debugging"}
+`if ($psdebugcontext) {"Debugging"} else {"Not Debugging"}`
 
-You can use the value of the $PSDebugContext variable in your
+You can use the value of the `$PSDebugContext` variable in your
 debugging.
 
-[DBG]: PS>>> $psdebugcontext.invocationinfo
+```[DBG]: PS>>> $psdebugcontext.invocationinfo
 
 Name   CommandLineParameters  UnboundArguments  Location
 ----   ---------------------  ----------------  --------
 =      {}                     {}                C:\ps-test\vote.ps1 (1)
+```
 
 Debugging and Scope
 Breaking into the debugger does not change the scope in which
@@ -222,17 +222,17 @@ you move into the script scope. The script scope is a child
 of the scope in which you ran the debugger.
 
 To find the variables and aliases that are defined in the
-script scope, use the Scope parameter of the Get-Alias or
-Get-Variable cmdlets.
+script scope, use the Scope parameter of the `Get-Alias` or
+`Get-Variable` cmdlets.
 
 For example, the following command gets the variables in the
 local (script) scope:
 
-get-variable -scope 0
+`get-variable -scope 0`
 
 You can abbreviate the command as:
 
-gv -s 0
+`gv -s 0`
 
 This is a useful way to see only the variables that you defined in the
 script and that you defined while debugging.
@@ -273,7 +273,7 @@ workflow, or a workflow calling a script--are not implemented.
 The following example demonstrates debugging a workflow. Note that when
 the debugger steps into the workflow function, the debugger prompt changes
 to [WFDBG].
-
+```
 PS C:> Set-PSBreakpoint -Script C:\TestWFDemo1.ps1 -Line 8
 
 ID Script           Line Command    Variable     Action
@@ -359,13 +359,14 @@ Handles  NPM(K)    PM(K)   WS(K) VM(M)   CPU(s)     Id ProcessName    PSComputer
 433      35   106688   128392   726     2.67   7124 powershell    localhost
 499      44   134244   172096   787     2.79   7452 powershell    localhost
 Workflow function complete.
+```
 
 Debugging Functions
 When you set a breakpoint on a function that has Begin, Process, and
 End sections, the debugger breaks at the first line of each section.
 
 For example:
-
+```
 function test-cmdlet
 {
 begin
@@ -410,7 +411,7 @@ Hit Command breakpoint on 'prompt:test-cmdlet'
 test-cmdlet
 
 # [DBG]: C:\PS>
-
+```
 
 Debugging Remote Scripts
 Starting in Windows PowerShell 5.0, you can run the Windows PowerShell debugger in
@@ -423,7 +424,7 @@ with breakpoints set in a script at lines 6, 11, 22, and 25. Note that in the
 example, when the debugger starts, there are two identifying prompts: the
 name of the computer on which the session is running, and the DBG prompt that
 lets you know you are in debugging mode.
-
+```
 Enter-Pssession -Cn localhost
 [localhost]: PS C:\psscripts> Set-PSBreakpoint .\ttest19.ps1 6,11,22,25
 
@@ -472,6 +473,7 @@ At C:\psscripts\ttest19.ps1:12 char:1
 [localhost]: [DBG]: PS C:\psscripts>> quit
 [localhost]: PS C:\psscripts> Exit-PSSession
 PS C:\psscripts>
+```
 
 Examples
 This test script detects the version of the operating system and
@@ -479,7 +481,7 @@ displays a system-appropriate message. It includes a function, a function
 call, and a variable.
 
 The following command displays the contents of the test script file:
-
+```
 c:>\PS-test>  get-content test.ps1
 
 function psversion {
@@ -495,6 +497,7 @@ else {
 $scriptname = $MyInvocation.MyCommand.Path
 psversion
 "Done $scriptname."
+```
 
 To start, set a breakpoint at a point of interest in the script, such
 as a line, command, variable, or function.
@@ -502,13 +505,14 @@ as a line, command, variable, or function.
 Start by creating a line breakpoint on the first line of the Test.ps1
 script in the current directory.
 
-PS C:\ps-test> set-psbreakpoint -line 1 -script test.ps1
+`PS C:\ps-test> set-psbreakpoint -line 1 -script test.ps1`
 
 You can abbreviate this command as:
 
-PS C:\ps-test> spb 1 -s test.ps1
+`PS C:\ps-test> spb 1 -s test.ps1`
 
 The command returns a line-breakpoint object
+```
 (System.Management.Automation.LineBreakpoint).
 
 Column     : 0
@@ -519,10 +523,10 @@ HitCount   : 0
 Id         : 0
 Script     : C:\ps-test\test.ps1
 ScriptName : C:\ps-test\test.ps1
-
+```
 Now, start the script.
 
-PS C:\ps-test> .\test.ps1
+`PS C:\ps-test> .\test.ps1`
 
 When the script reaches the first breakpoint, the breakpoint message
 indicates that the debugger is active. It describes the breakpoint and
@@ -532,68 +536,76 @@ control.
 
 The preview line includes the script name and the line number of the
 previewed command.
-
+```
 Entering debug mode. Use h or ? for help.
 
 Hit Line breakpoint on 'C:\ps-test\test.ps1:1'
 
 test.ps1:1   function psversion {
 # DBG>
-
+```
 
 Use the Step command (s) to execute the first statement in the script
 and to preview the next statement. The next statement uses the
-$MyInvocation automatic variable to set the value of the $ScriptName
+`$MyInvocation` automatic variable to set the value of the `$ScriptName`
 variable to the path and file name of the script file.
 
+```
 DBG> s
 test.ps1:11  $scriptname = $MyInvocation.MyCommand.Path
+```
 
-At this point, the $ScriptName variable is not populated, but you can
+At this point, the `$ScriptName` variable is not populated, but you can
 verify the value of the variable by displaying its value. In this case,
-the value is $null.
+the value is `$null`.
 
+```
 DBG> $scriptname
 # DBG>
-
+```
 
 Use another Step command (s) to execute the current statement and to
 preview the next statement in the script. The next statement calls the
 PsVersion function.
-
+```
 DBG> s
 test.ps1:12  psversion
+```
 
-At this point, the $ScriptName variable is populated, but you verify the
+At this point, the `$ScriptName` variable is populated, but you verify the
 value of the variable by displaying its value. In this case, the value
 is set to the script path.
-
+```
 DBG> $scriptname
 C:\ps-test\test.ps1
+```
 
 Use another Step command to execute the function call. Press ENTER,
 or type "s" for Step.
-
+```
 DBG> s
 test.ps1:2       "Windows PowerShell " + $psversiontable.psversion
+```
 
 The debug message includes a preview of the statement in the function.
 To execute this statement and to preview the next statement in the
 function, you can use a Step command. But, in this case, use a StepOut
 command (o). It completes the execution of the function (unless it
 reaches a breakpoint) and steps to the next statement in the script.
-
+```
 DBG> o
 Windows PowerShell 2.0
 Have you run a background job today (start-job)?
 test.ps1:13  "Done $scriptname"
+```
 
 Because we are on the last statement in the script, the Step, StepOut,
 and Continue commands have the same effect. In this case, use
 StepOut (o).
-
+```
 Done C:\ps-test\test.ps1
 PS C:\ps-test>
+```
 
 The StepOut command executes the last command. The standard command
 prompt indicates that the debugger has exited and returned control to the
@@ -604,65 +616,68 @@ breakpoint, use the Get-PsBreakpoint and Remove-PsBreakpoint cmdlets.
 (If you think you might reuse the breakpoint, use the
 Disable-PsBreakpoint cmdlet instead of Remove-PsBreakpoint.)
 
-PS C:\ps-test> Get-PsBreakpoint | Remove-PSBreakpoint
+`PS C:\ps-test> Get-PsBreakpoint | Remove-PSBreakpoint`
 
 You can abbreviate this command as:
 
-PS C:\ps-test> gbp | rbp
+`PS C:\ps-test> gbp | rbp`
 
 Or, run the command by writing a function, such as the following
 function:
 
-function delbr { gbp | rbp }
+`function delbr { gbp | rbp }`
 
 Now, create a breakpoint on the $scriptname variable.
 
-PS C:\ps-test> set-psbreakpoint -variable scriptname -script test.ps1
+`PS C:\ps-test> set-psbreakpoint -variable scriptname -script test.ps1`
 
 You can abbreviate the command as:
 
-PS C:\ps-test> sbp -v scriptname -s test.ps1
+`PS C:\ps-test> sbp -v scriptname -s test.ps1`
 
 Now, start the script. The script reaches the variable breakpoint. The
 default mode is Write, so execution stops just before the statement
 that changes the value of the variable.
-
+```
 PS C:\ps-test> .\test.ps1
 Hit Variable breakpoint on 'C:\ps-test\test.ps1:$scriptname'
 (Write access)
 
 test.ps1:11  $scriptname = $MyInvocation.mycommand.path
 # DBG>
-
+```
 
 Display the current value of the $scriptname variable, which
 is $null.
-
+```
 DBG> $scriptname
 # DBG>
-
+```
 
 Use a Step command (s) to execute the statement that populates
 the variable. Then, display the new value of the $scriptname
 variable.
-
+```
 DBG> $scriptname
 C:\ps-test\test.ps1
+```
 
 Use a Step command (s) to preview the next statement in the script.
-
+```
 DBG> s
 test.ps1:12  psversion
+```
 
 The next statement is a call to the PsVersion function. To skip the
 function but still execute it, use a StepOver command (v). If you are
 already in the function when you use StepOver, it is not effective. The
 function call is displayed, but it is not executed.
-
+```
 DBG> v
 Windows PowerShell 2.0
 Have you run a background job today (start-job)?
 test.ps1:13  "Done $scriptname"
+```
 
 The StepOver command executes the function, and it previews the next
 statement in the script, which prints the final line.
@@ -670,29 +685,29 @@ statement in the script, which prints the final line.
 Use a Stop command (t) to exit the debugger. The command prompt
 reverts to the standard command prompt.
 
-C:\ps-test>
+`C:\ps-test>`
 
 To delete the breakpoints, use the Get-PsBreakpoint and
 Remove-PsBreakpoint cmdlets.
 
-PS C:\ps-test> Get-PsBreakpoint | Remove-PSBreakpoint
+`PS C:\ps-test> Get-PsBreakpoint | Remove-PSBreakpoint`
 
 Create a new command breakpoint on the PsVersion function.
 
-PS C:\ps-test> Set-PsBreakpoint -command psversion -script test.ps1
+`PS C:\ps-test> Set-PsBreakpoint -command psversion -script test.ps1`
 
 You can abbreviate this command to:
 
-PS C:\ps-test> sbp -c psversion -s test.ps1
+`PS C:\ps-test> sbp -c psversion -s test.ps1`
 
 Now, run the script.
-
+```
 PS C:\ps-test> .\test.ps1
 Hit Command breakpoint on 'C:\ps-test\test.ps1:psversion'
 
 test.ps1:12  psversion
 # DBG>
-
+```
 
 The script reaches the breakpoint at the function call. At this point,
 the function has not yet been called. This gives you the opportunity
@@ -705,7 +720,7 @@ To set an action, use a Continue command (c) to exit the script, and a
 Remove-PsBreakpoint command to delete the current breakpoint.
 (Breakpoints are read-only, so you cannot add an action to the current
 breakpoint.)
-
+```
 DBG> c
 Windows PowerShell 2.0
 Have you run a background job today (start-job)?
@@ -713,6 +728,7 @@ Done C:\ps-test\test.ps1
 
 PS C:\ps-test> get-psbreakpoint | remove-psbreakpoint
 PS C:\ps-test>
+```
 
 Now, create a new command breakpoint with an action. The following
 command sets a command breakpoint with an action that logs the value
@@ -720,9 +736,11 @@ of the $scriptname variable when the function is called. Because the
 Break keyword is not used in the action, execution does not stop. (The
 backtick (`) is the line-continuation character.)
 
+```
 PS C:\ps-test> set-psbreakpoint -command psversion -script test.ps1  `
 -action { add-content "The value of `$scriptname is $scriptname." `
 -path action.log}
+```
 
 You can also add actions that set conditions for the breakpoint. In
 the following command, the command breakpoint is executed only if the
@@ -730,8 +748,10 @@ execution policy is set to RemoteSigned, the most restrictive policy
 that still permits you to run scripts. (The backtick (`) is the
 continuation character.)
 
+```
 PS C:\ps-test> set-psbreakpoint -script test.ps1 -command psversion `
 -action { if ((get-executionpolicy) -eq "RemoteSigned") { break }}
+```
 
 The Break keyword in the action directs the debugger to execute the
 breakpoint. You can also use the Continue keyword to direct the debugger
@@ -739,11 +759,12 @@ to execute without breaking. Because the default keyword is Continue,
 you must specify Break to stop execution.
 
 Now, run the script.
-
+```
 PS C:\ps-test> .\test.ps1
 Hit Command breakpoint on 'C:\ps-test\test.ps1:psversion'
 
 test.ps1:12  psversion
+```
 
 Because the execution policy is set to RemoteSigned, execution stops
 at the function call.
@@ -751,11 +772,12 @@ at the function call.
 At this point, you might want to check the call stack. Use the
 Get-PsCallStack cmdlet or the Get-PsCallStack debugger command (k).
 The following command gets the current call stack.
-
+```
 DBG> k
 2: prompt
 1: .\test.ps1: $args=[]
 0: prompt: $args=[]
+```
 
 This example demonstrates just a few of the many ways to use the Windows
 PowerShell debugger.
